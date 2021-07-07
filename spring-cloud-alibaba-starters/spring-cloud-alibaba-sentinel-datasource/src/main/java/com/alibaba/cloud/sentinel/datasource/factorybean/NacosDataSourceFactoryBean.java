@@ -60,15 +60,24 @@ public class NacosDataSourceFactoryBean implements FactoryBean<NacosDataSource> 
 			properties.setProperty(PropertyKeyConst.SERVER_ADDR, this.serverAddr);
 		}
 		else {
-			properties.setProperty(PropertyKeyConst.ACCESS_KEY, this.accessKey);
-			properties.setProperty(PropertyKeyConst.SECRET_KEY, this.secretKey);
 			properties.setProperty(PropertyKeyConst.ENDPOINT, this.endpoint);
+		}
+
+		if (!StringUtils.isEmpty(this.accessKey)) {
+			properties.setProperty(PropertyKeyConst.ACCESS_KEY, this.accessKey);
+		}
+		if (!StringUtils.isEmpty(this.secretKey)) {
+			properties.setProperty(PropertyKeyConst.SECRET_KEY, this.secretKey);
 		}
 		if (!StringUtils.isEmpty(this.namespace)) {
 			properties.setProperty(PropertyKeyConst.NAMESPACE, this.namespace);
 		}
-		properties.setProperty(PropertyKeyConst.USERNAME, this.username);
-		properties.setProperty(PropertyKeyConst.PASSWORD, this.password);
+		if (!StringUtils.isEmpty(this.username)) {
+			properties.setProperty(PropertyKeyConst.USERNAME, this.username);
+		}
+		if (!StringUtils.isEmpty(this.password)) {
+			properties.setProperty(PropertyKeyConst.PASSWORD, this.password);
+		}
 		return new NacosDataSource(properties, groupId, dataId, converter);
 	}
 

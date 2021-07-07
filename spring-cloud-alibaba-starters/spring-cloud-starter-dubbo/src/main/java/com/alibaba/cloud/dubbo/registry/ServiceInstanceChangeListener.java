@@ -14,25 +14,22 @@
  * limitations under the License.
  */
 
-package com.alibaba.cloud.dubbo.metadata.repository;
+package com.alibaba.cloud.dubbo.registry;
 
-import java.util.List;
-import java.util.Optional;
+import com.alibaba.cloud.dubbo.registry.event.ServiceInstancesChangedEvent;
 
-import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.context.ApplicationListener;
+import org.springframework.core.Ordered;
 
 /**
- * metadata service instance selector.
+ * The interface of ServiceInstanceChange event Listener.
  *
- * @author <a href="mailto:liuxx-u@outlook.com">liuxx</a>
+ * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
+ * @see ServiceInstancesChangedEvent
+ * @see Ordered
+ * @see ApplicationListener
  */
-public interface MetadataServiceInstanceSelector {
-
-	/**
-	 * choose a service instance to get metadata.
-	 * @param serviceInstances all service instance
-	 * @return the service instance to get metadata
-	 */
-	Optional<ServiceInstance> choose(List<ServiceInstance> serviceInstances);
+public interface ServiceInstanceChangeListener
+		extends ApplicationListener<ServiceInstancesChangedEvent>, Ordered {
 
 }
